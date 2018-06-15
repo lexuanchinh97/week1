@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Movie</string>
+    <!-- MOVIE LIST -->
+    <string name="row_rating">Rating: %1$s</string>
+    <string name="row_released">Released: %1$s</string>
 </resources>
