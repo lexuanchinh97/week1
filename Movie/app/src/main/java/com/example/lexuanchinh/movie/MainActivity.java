@@ -24,6 +24,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.lexuanchinh.movie.API.APIService.BASE_IMAGES_URL;
+import static com.example.lexuanchinh.movie.API.APIService.POSTER_SIZE;
+
 public class MainActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     MovieAdapter adapter;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         if(movieList == null) {
             setUpListView();
             callAPI();
+
         } else {
             //there is already data? screen must be rotating or tab switching
            adapter.setData(movieList);
@@ -61,11 +65,13 @@ public class MainActivity extends AppCompatActivity {
                      //   progressBar.setVisibility(View.GONE);
                         if (response.body() != null) {
                             //      Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
-                           int a=response.body().getPage();
-                           Toast.makeText(MainActivity.this, "chính"+a, Toast.LENGTH_SHORT).show();
+                       //    int a=response.body().getPage();
+                       //    Toast.makeText(MainActivity.this, "chính"+a, Toast.LENGTH_SHORT).show();
                            // adapter.setData(movieList);
+
                         list= response.body();
                         movieList=list.getMovie();
+                            createPosterLink(movieList.get(1).getPosterPath());
                         adapter.setData(movieList);
                         } else
                             Toast.makeText(MainActivity.this, response.message() != null ? response.message() : "Empty", Toast.LENGTH_SHORT).show();
@@ -104,5 +110,13 @@ public class MainActivity extends AppCompatActivity {
 //                callAPI();
 //            }
 //        });
+    }
+    private String createPosterLink(String path) {
+        if (path == null) return null;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(BASE_IMAGES_URL);
+        stringBuilder.append(POSTER_SIZE);
+        stringBuilder.append(path);
+        return stringBuilder.toString();
     }
 }

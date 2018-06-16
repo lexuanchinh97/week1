@@ -16,6 +16,9 @@ import com.example.lexuanchinh.movie.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.lexuanchinh.movie.API.APIService.BASE_IMAGES_URL;
+import static com.example.lexuanchinh.movie.API.APIService.POSTER_SIZE;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
 private List<Movie> data;
@@ -64,14 +67,13 @@ private List<Movie> data;
         Movie movie = data.get(position);
         if(movie!=null){
             holder.title.setText(movie.getTitle());
-            holder.title_original.setText(movie.getOriginalTitle());
-            holder.rating.setText(context.getString(R.string.row_rating, movie.getVoteAverage()));
-            holder.releaseYear.setText(context.getString(R.string.row_released, movie.getReleaseDate()));
+            holder.title_original.setText(movie.getOverview());
+            //holder.releaseYear.setText(context.getString(R.string.row_released, movie.getReleaseDate()));
 
             //Debug only
             //Picasso.with(context).setIndicatorsEnabled(true);
             //Picasso.with(context).setLoggingEnabled(true);
-            Glide.with(context).load(movie.getPosterPath())
+            Glide.with(context).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getBackdropPath())
                     .into(holder.thumb_image);
         }
 
@@ -95,16 +97,12 @@ private List<Movie> data;
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
         public TextView title_original;
-        public TextView rating;
-        public TextView releaseYear;
         public ImageView thumb_image;
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.txt_title);
-            title_original = (TextView) itemView.findViewById(R.id.txt_overview);
-            rating = (TextView) itemView.findViewById(R.id.txt_rating);
-            releaseYear = (TextView) itemView.findViewById(R.id.txt_release_year);
+           title_original = (TextView) itemView.findViewById(R.id.txt_overview);
             thumb_image = (ImageView) itemView.findViewById(R.id.img_thumbnail);
             itemView.setOnClickListener(this);
         }
