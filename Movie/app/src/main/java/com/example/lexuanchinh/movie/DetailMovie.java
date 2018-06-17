@@ -29,7 +29,7 @@ public class DetailMovie extends AppCompatActivity {
         Glide.with(DetailMovie.this).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getBackdropPath())
                 .into(img);
         txtTitle.setText(movie.getTitle());
-        txtRelaseDate.setText(movie.getReleaseDate());
+        txtRelaseDate.setText("Release Date: "+movie.getReleaseDate());
         txtOverview.setText(movie.getOverview());
     }
 }

@@ -2,6 +2,7 @@ package com.example.lexuanchinh.movie.entity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,17 +65,24 @@ private List<Movie> data;
     @SuppressLint("StringFormatMatches")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         Movie movie = data.get(position);
+
         if(movie!=null){
             holder.title.setText(movie.getTitle());
             holder.title_original.setText(movie.getOverview());
             //holder.releaseYear.setText(context.getString(R.string.row_released, movie.getReleaseDate()));
-
             //Debug only
             //Picasso.with(context).setIndicatorsEnabled(true);
             //Picasso.with(context).setLoggingEnabled(true);
-            Glide.with(context).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getPosterPath())
-                    .into(holder.thumb_image);
+            if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+                Glide.with(context).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getPosterPath())
+                        .into(holder.thumb_image);
+            }
+            else {
+                Glide.with(context).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getBackdropPath())
+                        .into(holder.thumb_image);
+            }
         }
 
     }
