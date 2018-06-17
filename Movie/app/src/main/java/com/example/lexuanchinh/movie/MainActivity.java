@@ -1,5 +1,6 @@
 package com.example.lexuanchinh.movie;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     //    movieList=new ArrayList<>();
         recyclerView=  findViewById(R.id.recyclerView);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 //        recyclerView.setHasFixedSize(true);
 //        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.
 //                VERTICAL,false);
@@ -64,14 +67,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<MovieList> call, Response<MovieList> response) {
                      //   progressBar.setVisibility(View.GONE);
                         if (response.body() != null) {
-                            //      Toast.makeText(MainActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
-                       //    int a=response.body().getPage();
-                       //    Toast.makeText(MainActivity.this, "chính"+a, Toast.LENGTH_SHORT).show();
-                           // adapter.setData(movieList);
-
                         list= response.body();
                         movieList=list.getMovie();
-                            createPosterLink(movieList.get(1).getPosterPath());
                         adapter.setData(movieList);
                         } else
                             Toast.makeText(MainActivity.this, response.message() != null ? response.message() : "Empty", Toast.LENGTH_SHORT).show();
@@ -99,24 +96,19 @@ public class MainActivity extends AppCompatActivity {
         adapter.setListener(new MovieAdapter.IClickListener() {
            @Override
            public void onItemClick(Movie movie) {
-               Toast.makeText(MainActivity.this, movie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
+               //Toast.makeText(MainActivity.this, movie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
+               Intent intent=new Intent(MainActivity.this,DetailMovie.class);
+               
+               startActivity(intent);
            }
        });
         this.recyclerView.setAdapter(adapter);
 
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                callAPI();
-//            }
-//        });
-    }
-    private String createPosterLink(String path) {
-        if (path == null) return null;
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(BASE_IMAGES_URL);
-        stringBuilder.append(POSTER_SIZE);
-        stringBuilder.append(path);
-        return stringBuilder.toString();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callAPI();
+            }
+        });
     }
 }
