@@ -1,6 +1,8 @@
 package com.example.lexuanchinh.movie;
 
 import android.content.Intent;
+import android.mtp.MtpObjectInfo;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import static com.example.lexuanchinh.movie.API.APIService.BASE_IMAGES_URL;
 import static com.example.lexuanchinh.movie.API.APIService.POSTER_SIZE;
 
 public class MainActivity extends AppCompatActivity {
+    static int page=1;
     SwipeRefreshLayout swipeRefreshLayout;
     MovieAdapter adapter;
     List<Movie> movieList;
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void callAPI() {
     //    progressBar.setVisibility(View.VISIBLE);
 
-        APIService.getInstance().getNowPlaying(APIService.API_KEY, 1, Locale.getDefault().getLanguage()).enqueue(
+        APIService.getInstance().getNowPlaying(APIService.API_KEY, page++, Locale.getDefault().getLanguage()).enqueue(
                 new Callback<MovieList>() {
                     @Override
                     public void onResponse(Call<MovieList> call, Response<MovieList> response) {
@@ -96,9 +99,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.setListener(new MovieAdapter.IClickListener() {
            @Override
            public void onItemClick(Movie movie) {
-               //Toast.makeText(MainActivity.this, movie.getOriginalTitle(), Toast.LENGTH_SHORT).show();
+           //    movie=new Movie();
+              // Toast.makeText(MainActivity.this, movie.getReleaseDate(), Toast.LENGTH_SHORT).show();
                Intent intent=new Intent(MainActivity.this,DetailMovie.class);
-               
+               intent.putExtra("moive", movie );
                startActivity(intent);
            }
        });
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
                 callAPI();
             }
         });

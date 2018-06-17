@@ -3,9 +3,11 @@ package com.example.lexuanchinh.movie.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
@@ -160,4 +162,6 @@ public class Movie {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+
 }

@@ -73,7 +73,7 @@ private List<Movie> data;
             //Debug only
             //Picasso.with(context).setIndicatorsEnabled(true);
             //Picasso.with(context).setLoggingEnabled(true);
-            Glide.with(context).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getBackdropPath())
+            Glide.with(context).load(BASE_IMAGES_URL+POSTER_SIZE+movie.getPosterPath())
                     .into(holder.thumb_image);
         }
 
