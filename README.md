@@ -22,15 +22,16 @@ The following **additional** features are implemented:
 * [ ] List anything else that you can get done to improve the app functionality!
 ## Video Walkthrough
 Here's a walkthrough of implemented user stories:
-https://imgur.com/APrTCSf.gif
+
 https://imgur.com/Gm5U3Z7.gif
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/APrTCSf.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/Gm5U3Z7.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 Describe any challenges encountered while building the app.
 ## Open-source libraries used
-- [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
-- [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
+- [Retrofit](https://guides.codepath.com/android/Consuming-APIs-with-Retrofit) 
+- [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
 ## License
     Copyright [yyyy] [name of copyright owner]
     Licensed under the Apache License, Version 2.0 (the "License");
