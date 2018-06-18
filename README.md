@@ -31,7 +31,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 Describe any challenges encountered while building the app.
 ## Open-source libraries used
 - [Retrofit](https://guides.codepath.com/android/Consuming-APIs-with-Retrofit) 
-- [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
+- [Glide](https://github.com/bumptech/glide) - 
 ## License
     Copyright [yyyy] [name of copyright owner]
     Licensed under the Apache License, Version 2.0 (the "License");
